@@ -1,84 +1,55 @@
-// SEGUNDA PRE-ENTREGA JAVASCRIPT / SIMULADOR INTERACTIVO
+// TERCER PRE-ENTREGA JAVASCRIPT / SIMULADOR INTERACTIVO
 
 
 // Este es un simulador interactivo de un Club de Natacion. 
 
 
-// En primer lugar, se le solicita al socio del club que ingrese la clave del club para ingresar:
+// A contunuacion cambiamos el h1:
 
-let contrasenia = "1234"
-let contraseniaIngresada = prompt("Ingrese clave para ingresar al Club")
+const titulo = document.querySelector("h1").textContent = "Aquario - Club de Natación"
 
-if (contraseniaIngresada == contrasenia) {
-    console.log("Acceso correcto")
-} else {
-    console.log("Acceso denegado")
+//A continuación se elimina contenido del h2:
+
+const subtitulo = document.querySelector("h2")
+subtitulo.remove()
+
+//A continuación se agregan elementos desde un Array. La class catalogo del div:
+
+const catalogo = document.querySelector(".catalogo")
+console.log(catalogo)
+
+let actividades = ["Pileta con profe", "Pileta libre", "Aqua Gym", "Pileta para chicos", "Pileta tercera edad"]
+
+for (let c of actividades) {
+    let listado = document.createElement("li")
+    listado.innerHTML = c
+    catalogo.appendChild(listado)
 }
 
-// A continuacion, se le pide al socio que elija la piscina a entrenar:
+//A continuación se aplica Eventos al form:
 
-let piscina = prompt(`Elija la piscina para entrenar:
-1: Sirena
-2: Tiburon
-3: Corales
-`)
+const formulario = document.querySelector("form")
+const nombre = document.querySelector("#name")
+const email = document.querySelector("#email")
 
-switch (piscina) {
-    case "1":
-        console.log("Elegiste entrenar en Sirena")
-        break;
-    case "2":
-        console.log("Elegiste entrenar en Tiburon")
-        break;
-    case "3":
-        console.log("Elejiste entrenar en Batman")
-        break;
-    default:
-        console.log("Elija una alternativa valida")
-        break;
+formulario.addEventListener("submit", validarFormulario)
+
+function validarFormulario(e) {
+    e.preventDefault()
+    console.log(`Nombre: ${nombre.value}`)
+    console.log(`Email: ${email.value}`)
 }
 
-//Luego, se le pide al socio que ingrese frase motivadora para que se reproduzca en las pantallas de Club:
+//Agregamos info al STORAGE:
 
-let entrada = prompt("Ingrese frases motivadoras, las mismas se veran en las pantallas, al finalizar escriba FIN")
-let texto = ""
+const horarios = ["Temprano", "Medio dia", "Tarde", "Noche"]
 
-while (entrada != "FIN" && entrada != "fin") {
-    texto += entrada + " "
-    entrada = prompt("Ingrese frases motivadoras, la mismas se veran en las pantallas, al finalizar escriba FIN")
-}
+const horariosStr = JSON.stringify(horarios)
 
-alert(texto)
+localStorage.setItem("horarios", horariosStr)
 
-// A contunuacion, se hace una funcion para que el personal del club ingrese su nombre:
-
-function solicitarNombre() {
-    let nombre = prompt("Ingrese su nombre")
-    console.log(`Bienvenido ${nombre}`)
-}
-
-solicitarNombre()
-
-// A continuacion se hace Class y function para altas de nuevos clientes:
-
-class Cliente {
-    constructor(nombre, acceso) {
-        this.nombre = nombre
-        this.acceso = acceso
-        this.alta = function () {
-            console.log("Alta, de " + this.nombre)
-        }
-    }
-}
-const lucasGarcia = new Cliente("Lucas Garcia", "Aceptado")
-const yohanaRollino = new Cliente("Yohana Rollino", "Aceptado")
-const luisinaPautasso = new Cliente("Luisina Pautasso", "Aceptado")
-const IgancioCoria = new Cliente("Ignacio Coria", "Aceptado")
-
-lucasGarcia.alta()
-
-//A continuacion tengo un Array de objetos para registrar los turnos de 1 hora de los clientes que ingresan a la
-//piscina:
+// //A continuacion tengo un Array de objetos para registrar los turnos de 1 hora de los clientes que ingresan a la
+// //piscina:
 
 const ingreso = []
 
@@ -97,31 +68,17 @@ const tercerIngreso = {
     socio: 3
 }
 
-ingreso.push(primerIngreso)
-ingreso.push(segundoIngreso)
-ingreso.push(tercerIngreso)
+// Con AND si no hay ingresos:
 
-//Una vez que se van cumpliendo los turnos, se van eliminando los primeros clientes que ingresaron, con un SHIFT:
+ingreso.length === 0 && console.log("No hay ingresos")
 
-ingreso.shift()
-console.log(ingreso)
+// DESESTRUCTURACION para conocer el apellido de un alumno:
 
-// A continuacion, mediante un FOR EACH, me arroja una lista de todos los socios:
+const dato = {
+    nombre: "Juan",
+    apellido: "Perez",
+    edad: 30,
+}
 
-const listaSocios = ["juan", "belen", "ignacio", "Lucas"]
-
-listaSocios.forEach((p, i) => {
-    console.log(`${i}: ${p}`)
-})
-
-// A continuacion, filtro por los soscios con una edad superior a 20:
-
-const datos = [
-    { nombre: "Juan", edad: 20 },
-    { nombre: "Carla", edad: 19 },
-    { nombre: "Jose", edad: 18 }
-]
-
-let resultado = datos.filter((n) => n.edad >= 20)
-
-console.log(resultado)
+const { apellido } = dato
+console.log(apellido)
