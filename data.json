@@ -1,0 +1,20 @@
+{
+    "productos": [
+        {
+            "nombre": "Antiparras",
+            "precio": 1000
+        },
+        {
+            "nombre": "Gorro de pileta",
+            "precio": 500
+        },
+        {
+            "nombre": "Tapones para oído",
+            "precio": 700
+        },
+        {
+            "nombre": "Trajes de baño",
+            "precio": 2000
+        }
+    ]
+}

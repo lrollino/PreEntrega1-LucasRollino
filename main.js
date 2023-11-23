@@ -1,4 +1,4 @@
-// TERCER PRE-ENTREGA JAVASCRIPT / SIMULADOR INTERACTIVO
+// ENTREGA FINAL JAVASCRIPT / SIMULADOR INTERACTIVO
 
 
 // Este es un simulador interactivo de un Club de Natacion. 
@@ -82,3 +82,33 @@ const dato = {
 
 const { apellido } = dato
 console.log(apellido)
+
+// Se utiliza Libreria de Sweetalert para el button de Send:
+
+const button = document.querySelector("button")
+
+button.addEventListener("click", () => {
+    Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Procesado",
+        showConfirmButton: false,
+        timer: 1500
+    });
+})
+
+// Se incluye Promesas, funcion asincronica y fetch. Se obtienen los datos desde json:
+
+async function cargarProductos() {
+    try {
+        const response = await fetch("./data.json")
+        const data = await response.json()
+        const productos = data.productos
+        console.log(productos)
+    } catch (error) {
+        console.error("Error al cargar los productos")
+    }
+}
+
+cargarProductos()
+
